@@ -28,7 +28,7 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-     //   resultText.text = viewModel.getResult().toString()
+        resultText.text = viewModel.getResult().toString()
         // TODO: Use the ViewModel
         //add this lambda - be careful, don't import java util observer
         /*
@@ -39,16 +39,18 @@ class MainFragment : Fragment() {
          */
 
 // this is a longer versiion of the SAM above
-        class resultObserver : Observer<Float> {
-           override fun onChanged(result: Float?) {
+        class resultObserver : Observer<Int> {
+           override fun onChanged(result: Int?) {
                 resultText.text = result.toString()
             }
         }
 
         val myResultObserver = resultObserver()
-//end of longer version
 
-     //   this.viewModel.getResult().observe(viewLifecycleOwner,  resultObserver())
+
+    //end of longer version
+
+    // this.viewModel.getResult().observe(viewLifecycleOwner,  resultObserver())
 
 
 
@@ -61,15 +63,16 @@ class MainFragment : Fragment() {
         convertButton.setOnClickListener {
 
 
-            if (dollarText.text.isNotEmpty()) {
+            if (aText.text.isNotEmpty() && bText.text.isNotEmpty()) {
 
-                viewModel.setAmount(dollarText.text.toString())
+                viewModel.setAmount(aText.text.toString().toInt(), bText.text.toString().toInt())
                 //don't need this
                 //resultText.text = viewModel.getResult().toString()
+                resultText.text = viewModel.getResult().toString()
 
             } else {
 
-                resultText.text = "No Value"
+                resultText.text = "..."
 
             }
         }

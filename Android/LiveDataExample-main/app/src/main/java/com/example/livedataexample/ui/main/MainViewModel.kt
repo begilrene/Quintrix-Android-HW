@@ -8,26 +8,30 @@ class MainViewModel : ViewModel() {
 
     private val usd_to_eu_rate = 0.74f
 
-    private var dollarText = ""
-
+    private var A = 0
+    private var B = 0
    // private var result: Float = 0f
-    private  var result : MutableLiveData<Float> = MutableLiveData()
+    private  var result : MutableLiveData<Int> = MutableLiveData()
+    //private var B : MutableLiveData<Int> = MutableLiveData()
 
+    fun setAmount(a: Int, b: Int) {
 
-    fun setAmount(value: String) {
+        this.A = a
+        this.B = b
 
-        this.dollarText = value
+        result.value = A * B
 
         //result = value.toFloat() * usd_to_eu_rate
-    result.setValue(value.toFloat()*usd_to_eu_rate)
+       // result.setValue(value.toFloat()*usd_to_eu_rate)
     }
 
 
 
     //fun getResult(): Float? {
 
-    fun getResult():MutableLiveData<Float>{
+    fun getResult():MutableLiveData<Int>{
         return result
 
     }
+
 }
